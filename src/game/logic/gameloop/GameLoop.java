@@ -36,7 +36,7 @@ public class GameLoop {
 
 
     public static void startScreen(Graphics g, BufferedImage b){
-        startButton = new GameButton(280, 250, 96, 200); //START gameButton
+        startButton = new GameButton(280, 250, 96, 200); //START gameButton(changed)
             Point mouse = gameScreen.getMousePosition();
             startButton.updateRect();
             g.drawRect(startButton.box.x, startButton.box.y, startButton.getWidth(),startButton.getHeight());
@@ -45,14 +45,14 @@ public class GameLoop {
             Rectangle mouse_hitbox= new Rectangle((int) mouse.getX(), (int) mouse.getY(), 1, 1);
 
             if (startButton.box.intersects(mouse_hitbox)) {
-                g.drawImage(menu_button_imgs.get(1), 400, 100, null);
+                g.drawImage(menu_button_imgs.get(1), 96, 200, null);
             }
             if (!startButton.box.intersects(mouse.getX(), mouse.getY(), 1, 1)) {
-                g.drawImage(menu_button_imgs.get(0), 400, 100, null);
+                g.drawImage(menu_button_imgs.get(0), 96, 200, null);
             }
 
         } else {
-            g.drawImage(menu_button_imgs.get(0), 400, 100, null);
+            g.drawImage(menu_button_imgs.get(0), 96, 200, null);
         }
         gameScreen.repaint();
 
@@ -65,7 +65,7 @@ public class GameLoop {
         base_level.updateRect();
         level_2.updateRect();
         g.drawImage(b.getSubimage(96, 274, 1502, 516), 0, 0, null);
-        g.drawImage(misc.getSubimage(464,64, 500,70), 100, 20, null);
+        g.drawImage(misc.getSubimage(442,64, 420,76), 700, 10, null);//Changed
         if(mouse != null) {
             if (base_level.box.intersects(mouse.getX(), mouse.getY(), 1, 1)) {
                 g.drawImage(misc.getSubimage(442, 194, 420, 76), 96, 100, null);
@@ -124,7 +124,7 @@ public class GameLoop {
             g.drawImage(b2, bot.screenX+8,bot.screenY-8,null);
         }
         if(bot.health ==1){
-            g.drawImage(b1, player_entity.screenX+8,player_entity.screenY-8,null);
+            g.drawImage(b1, bot.screenX+8,bot.screenY-8,null);//changed
         }
 
 
@@ -134,6 +134,7 @@ public class GameLoop {
         showSelectionScreen=true;
         player_entity=null;
         bot=null;
+        System.out.println("YOU WON!");//changed
         //TODO: add sounds
         }else {
             if(bot.health==0){
@@ -141,12 +142,13 @@ public class GameLoop {
                 showSelectionScreen=true;
                 player_entity=null;
                 bot=null;
+                System.out.println("YOU LOST! Try Again.");
             }
         }
 
 
-
-        if(update == 40) {
+        //Move methods changed
+        if(update == 6) {
             nav.move();
             update=0;
         }
@@ -154,7 +156,7 @@ public class GameLoop {
             manager.hasTravellingBullet=true;
             manager.prepareAttack();
         }
-        if(updateBullets==10){
+        if(updateBullets==2){
             if(manager.bullet != null){
                 manager.bullet.setHitbox();
                 if(manager.hasCollided() == false) {
@@ -215,6 +217,11 @@ public class GameLoop {
             Rectangle seg_7 = new Rectangle(756, 128, 64, 148);
             Rectangle seg_8 = new Rectangle(582, 128, 172, 32);
             Rectangle seg_9 = new Rectangle(760, 382, 50, 134);
+//Changed
+            Rectangle barrier_1 = new Rectangle(0,0, 6, 516);
+            Rectangle barrier_2 = new Rectangle(0,0, 1000, 6);
+            Rectangle barrier_3 = new Rectangle(1000, 0, 6, 516);
+            Rectangle barrier_4 = new Rectangle(0,0, 1000, 6);
 
             var.add(seg_1);
             var.add(seg_2);
@@ -225,14 +232,29 @@ public class GameLoop {
             var.add(seg_7);
             var.add(seg_8);
             var.add(seg_9);
+
+            var.add(barrier_1);
+            var.add(barrier_2);
+            var.add(barrier_3);
+            var.add(barrier_4);
         }else {
             Rectangle seg_10= new Rectangle(218,292, 368, 60);
             Rectangle seg_11= new Rectangle(390, 150, 54, 144);
             Rectangle seg_12= new Rectangle(768, 2, 68, 272);
+//changed
+            Rectangle barrier_1 = new Rectangle(0,0, 6, 516);
+            Rectangle barrier_2 = new Rectangle(0,0, 1000, 6);
+            Rectangle barrier_3 = new Rectangle(1000, 0, 6, 516);
+            Rectangle barrier_4 = new Rectangle(0,0, 1000, 6);
 
             var.add(seg_10);
             var.add(seg_11);
             var.add(seg_12);
+            var.add(barrier_1);
+            var.add(barrier_2);
+            var.add(barrier_3);
+            var.add(barrier_4);
+
 
         }
 

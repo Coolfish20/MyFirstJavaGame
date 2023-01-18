@@ -20,7 +20,7 @@ public class KeyDetector implements KeyListener {
     e.getKeyCode() == KeyEvent.VK_A ||
     e.getKeyCode() == KeyEvent.VK_W ||
     e.getKeyCode() == KeyEvent.VK_S){
-    if(gameRunning == true && gameScreen.isFocused()){
+    if(gameRunning == true){//changed
         int s = -1;
             if(e.getKeyCode() ==KeyEvent.VK_D) {
                 player_entity.xMove+=2;
@@ -42,6 +42,7 @@ public class KeyDetector implements KeyListener {
                 s = 3;
             }
         player_entity.updatePos(s);
+            System.out.println("Update Pos!");
     }
 
     }else {
